@@ -111,7 +111,7 @@ analytics:
 author:
   name             : "RealBJ"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "expert beginner,code monkey 가 아닌 SW 개발자"
+  bio              : "expert beginner,code monkey가 아닌 SW개발자"
   location         : "Seoul"
   email            :
   links:
