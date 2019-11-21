@@ -7,7 +7,6 @@ IntervalMap
 * /media/blink에서 사용되는 template로 만든 object.
 * std::map를 사용하여 만들어짐
 * 특징: 특정 범위에 대해 값을 설정하거나, 증가감 시킬 수 있다.
-<br>
 * test code를 통해 method의 의도를 파악 할 수 있다.
 <br>
 
