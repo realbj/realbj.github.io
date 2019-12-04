@@ -71,3 +71,25 @@
  * 약간 구식의 디텍토리 다이어그램이 있습니다. 부분적으로 WebKit은 blink/renderer로 대체 해야 합니다. 
  * 아래 있는 모듈은 높은 상위 모듈의 코드를 include 할 수 없습니다. (예를 들면 content는 chrome 헤더를 include할 수 없다.) 하지만 임베디드 API을 사용할 수 있다.
  ![구식다이어그램](https://www.chromium.org/_/rsrc/1308680092356/developers/how-tos/getting-around-the-chrome-source-code/Content.png)
+
+## Content/
+* browser
+ * 어플리케이션을 위한 백엔드(backend)로 모든 I/O와 자식 프로세스와의 통신을 관리한다. 웹페이지의 렌더링을 위한 소통에 필요하다
+* common 
+ * 여기 파일들은 여러 프로세스 사이에 공유된다. 예를 들면 브라우저와 렌더러, 렌더러와 플러그인 등...
+ * 크롬에 특화된 코드이며, base에 적용할 수 없다.
+* gpu
+ * GPU 프로세스 관련 코드로 3D 합성/ 3D Api에 사용된다.
+* plugin
+ * 브라우저 플러그인(다른 프로세스)을 실행하기 위한 코드이다.
+* ppapi_plugin
+ * Pepper plugin 프로세스를 위함 [the Pepper plugin](http://egloos.zum.com/Aimez/v/1868756)
+* renderer
+ * 각 텝의 하위 프로세스와 관련된 코드
+ * I/O를 위해 브라우저와 통신하고, WebKit을 심는다(embed).
+* utility
+ * 센드박스 프로세스에서 렌덤처리를 위한 코드.  
+ * 브라우저에서 신뢰하지 않은 데이터를 처리할 때 사용한다.
+* worker
+ * HTML5 Web Workers.
+
