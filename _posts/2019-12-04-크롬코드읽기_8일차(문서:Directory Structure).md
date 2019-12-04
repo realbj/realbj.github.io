@@ -65,3 +65,9 @@
     * V8 Javascript 라이브러리
     * 별도의 구글 저장소에서 관리하다. 
   
+ * 여러 역사적인 이유로, 몇몇의 작은 top level 디렉토리가 있습니다. 
+ * 다음은 어플리케이션(예를 들면 크롬, 안드로이드 WebView, Ash)을 위한 신규 top level 디렉토리 안내입니다.  
+ * 어플리케이션이 중복 실행 될 수 있더라도 코드는 어플리케이션 내 하위 디렉토리에 위치해야 합니다. 
+ * 약간 구식의 디텍토리 다이어그램이 있습니다. 부분적으로 WebKit은 blink/renderer로 대체 해야 합니다. 
+ * 아래 있는 모듈은 높은 상위 모듈의 코드를 include 할 수 없습니다. (예를 들면 content는 chrome 헤더를 include할 수 없다.) 하지만 임베디드 API을 사용할 수 있다.
+ ![구식다이어그램](https://www.chromium.org/_/rsrc/1308680092356/developers/how-tos/getting-around-the-chrome-source-code/Content.png)
