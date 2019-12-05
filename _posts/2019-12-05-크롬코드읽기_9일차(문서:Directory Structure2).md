@@ -73,3 +73,46 @@
   * [smart-pointer-guidelines](https://www.chromium.org/developers/smart-pointer-guidelines)
   * [chromium-string-usage](https://www.chromium.org/developers/chromium-string-usage)
 
+## 공통 동작(common operations)을 위한 코드 위치(Paths)
+* Application startup
+  * WinMain는(chrome/app/main.cc)에 있고, chrome 프로젝트와 링크되어 있다. 
+  * WinMain은 구글 업데이트 클라이언트를 실행시킨다.
+    * 구글 업데이트 클라이언트는 설치/자동업데이트를 담당한다.
+    * 업데이터는 하위 경로에서 현재 버전을 찾고, chrome.dll을 로드한다. 
+  * 새로 로드된 라이브러리에서 ChromeMain(chrome_main.cc, chrome_dll)를 호출한다. 
+  * ChromeMain은 공통 컴퍼넌트를 초기화 한다, 그 후 둘중 하나를 진행한다. 그러면 브라우저가 실행 된다.
+    * 실행 옵션(command line flag)에 의해 하위 프로세스 실행이 필요하다면 RendererMain (chrome/renderer/renderer_main.cc) 
+    * 새로운 어플리케이션을 로드할 필요하 없다면 BrowserMain (chrome/browser/browser_main.cc)
+  * BrowserMain은 브라우저 초기화를 한다.
+    * 다양한 실행모드가 있다. (설치된 webapp 실행 모드 / 브라우저 테스트에 연결 모드 등)
+  * LaunchWithProfile(browser_init.cc)는 새로운 Browser object(chrome/browser/ui/browser.cc)를 생성한다. 
+    * 이 object는 어플리케이션의 최상위 윈도우를 캡슐화 한 것이다. 
+    * 첫번째 tab과 동시에 추가된다.    
+* Tab startup & initial navigation
+  * Browser::AddTab (chrome/browser/ui/broser.cc)는 신규 텝이 추가될 때 호출 된다.
+  * 이는 TabContents (browser/tab_contents/tab_contents.cc)를 생성한다.
+  * TabContents는  
+    * RenderViewHostManager의 초기화 함수(chrome/browser/tab_contents/render_view_host_manager.cc)를 통해
+    * RenderViewHost(chrome/browser/renderer_host/render_view_host.cc)를 생성한다. 
+  * SiteInstance의 RenderViewHost (Object)는 1개의 렌더러 하위 프로세스를 의미한다.   (???)
+    * RenderViewHost는 새로운 렌더러 프로세스러로 실행되거나, 현존하는 RenderProcessHost, RenderProcessHost를 재사용된것.
+  * Tab Contents의 NavigationController(chrome/browser/tab_contents/navigation_controller.cc)는 URL 목적지를 URL Bar로 부터 전달 받는다. 
+    * NavigationController::LoadURL
+* Navigating from the URL bar
+  * URL bar에 입력된 URL은 AutocompleteEdit::OpenURL에 전달 된다. 
+    * 물론 검색어를 입력한 경우등의 예외는 있다.
+  * Navigation controller는 URL로 이동할 것을 지시 받습니다. (NavigationController::LoadURL)
+  * NavigationController는 TabContents::Navigate를 NavigationEntry와 같이 호출 한다. 
+    * 페이지 전환을 나타내기 위해 만들어 진다.
+    * 렌더러 프로세스의 RednerView가 필요하다면 RenderViewHost를 생성한다.
+      * 첫번째 페이지 이동이거나 렌더러가 크레시 난 경우, RenderView가 없을 것이다. 
+  * NavigationController는 navigation entry를 "pending" 마킹하고 저장한다. 
+    * 페이지 전환이 가능한지 확실하지 않기 때문이다.
+  * RenderViewHost::NavigateToEntry는 RenderView(renderer process)에게 a ViewMsg_Navigate를 보낸한다.
+  * 네비게이트의 성공/실패, 변경이 있을 때, RenderViewHost 는 RenderView로부터 ViewHostMsg_FrameNavigate를 기다린다.
+  * WebKit가 committed 하면(서버가 응답하면 그 data를 보낸다), the RenderView는 이 message를 보낸다. 이것은 RenderViewHost::OnMsgNavigate 에서 관리
+  * NavigationEntry는 로드가 되었다고 업데이트 된다. 링크 클릭의 경우, 브라우저가 볼적 없는 URL인 경우, 브라우저 초기화된 경우, 최초 실행의 경우, 많은 redirect가 있는 URL인 경우 
+  * NavigationController는  경로 목록에 정보를 업데이트 한다. (pending 마킹이 load로 변경 되는 듯 하다.)
+  
+  
+* Navigations and session history
