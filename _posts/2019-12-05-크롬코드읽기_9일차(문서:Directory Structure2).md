@@ -61,4 +61,15 @@
   * profiles
     * 일반적인 random history data. 테스트를 위해 사용된다.
     
-## 
+## 학습자료
+* [Top Quality Design docs](https://www.chromium.org/developers/design-documents)
+* important dev docs
+  * [multi-process-architecture](https://www.chromium.org/developers/design-documents/multi-process-architecture)
+  * [displaying-a-web-page-in-chrome](https://www.chromium.org/developers/design-documents/displaying-a-web-page-in-chrome)
+  * [inter-process-communication](https://www.chromium.org/developers/design-documents/inter-process-communication)
+  * [threading](https://www.chromium.org/developers/design-documents/threading)
+* code idioms
+  * [important-abstractions-and-data-structures](https://www.chromium.org/developers/coding-style/important-abstractions-and-data-structures)
+  * [smart-pointer-guidelines](https://www.chromium.org/developers/smart-pointer-guidelines)
+  * [chromium-string-usage](https://www.chromium.org/developers/chromium-string-usage)
+
