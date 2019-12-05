@@ -112,7 +112,22 @@
   * 네비게이트의 성공/실패, 변경이 있을 때, RenderViewHost 는 RenderView로부터 ViewHostMsg_FrameNavigate를 기다린다.
   * WebKit가 committed 하면(서버가 응답하면 그 data를 보낸다), the RenderView는 이 message를 보낸다. 이것은 RenderViewHost::OnMsgNavigate 에서 관리
   * NavigationEntry는 로드가 되었다고 업데이트 된다. 링크 클릭의 경우, 브라우저가 볼적 없는 URL인 경우, 브라우저 초기화된 경우, 최초 실행의 경우, 많은 redirect가 있는 URL인 경우 
-  * NavigationController는  경로 목록에 정보를 업데이트 한다. (pending 마킹이 load로 변경 되는 듯 하다.)
+  * NavigationController는  경로 목록에 정보를 업데이트 한다. 
   
   
 * Navigations and session history
+ * 개요
+    * 각각의 NavigationEntry는 page ID, block of history state data를 저장한다.
+    * page ID는 각 page load를 구분하기 위해 사용한다. 그래서 우리는 어떤 NavigationEntry에 해당하는지 알고 있다.
+    * 페이지 로딩이 완료된 정보가 전달 되면, pending NavigationEntry는 -1의 page ID를 갖게 된다.
+    * The history state data는 문자열로 연속된다.  (WebCore::HistoryItem) the page URL, subframe URLs, and form data 이 포함되어 있다.
+  * 브라우저가 요청을 시작 할 때(URL bar에 주소 입력, back/forward/reload 클릭)
+    * A WebRequest is made representing the navigation, along with extra information like a page ID for bookkeeping. New navigations have an ID of -1. Navigations to old entries have the ID assigned to the NavigationEntry when the page was first visited. This extra information will be queried later when the load commits.
+    * The main WebFrame is told to load the new request.
+  * When the renderer initiates the request (user clicks a link, javascript changes the location, etc):
+    * WebCore::FrameLoader is told to load the request via one of its bajillion varied load methods.
+  * In either case, when the first packet from the server is received, the load is committed (no longer "pending" or "provisional").
+  * If this was a new navigation, WebCore will create a new HistoryItem and add it to the BackForwardList, a WebCore class. In this way, we can differentiate which navigations are new, and which are session history navigations.
+  * RenderView::DidCommitLoadForFrame handles the commit for the load. Here, the previous page's state is stored in session history, via the ViewHostMsg_UpdateState message. This will tell the browser to update the corresponding NavigationEntry (identified by RenderView's current page ID) with the new history state.
+  * RenderView's current page ID is updated to reflect the committed page. For a new navigation, a new unique page ID is generated. For a session history navigation, it will be the page ID originally assigned when it was first visited, which we had stored on the WebRequest when initiating the navigation.
+  * A ViewHostMsg_FrameNavigate message is sent to the browser, updating the corresponding NavigationEntry (identified by RenderView's newly updated page ID) with the new URL and other information.
