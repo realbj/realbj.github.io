@@ -122,31 +122,19 @@
     * 페이지 로딩이 완료된 정보가 전달 되면, pending NavigationEntry는 -1의 page ID를 갖게 된다.
     * The history state data는 문자열로 연속된다.  (WebCore::HistoryItem) the page URL, subframe URLs, and form data 이 포함되어 있다.
   * 브라우저가 요청을 시작 할 때(URL bar에 주소 입력, back/forward/reload 클릭)
-    WebRequest 는 여러 추가 정보들 사이에서 네비게이션을 대표한다. 새로운 네비게이션은 -1의 ID를 갖는다.
-“이전 항목”으로 이동할 때는 처음 방문 했을 때의  ID가 할당 됩니다.
-이 추가정보는 로드가 “commits”될 때, 쿼리된다. 
-메인 WebFrame은 새로운 요청의 로드를 요청한다.
-
-렌더러가 요청을 시작할 때, (유저가 링크를 클릭하거나, 자바스크립트가 location을 변경하는 등)
-	WebCore::FrameLoader는 bajillion varied 로드 메소드를 통해 로드를 요청한다. (??????)
-
-첫 포켓을 서버로 부터 받으면 로드는 완료 된다. (더 이상 “pending”, “provisional”가 없을 때)
-
-첫 방문이라면, webCore는 새로운 historyItem을 만들고 이전 탐색 리스트에  추가할 것이다. 
-
-우리는 새로운 탐색인지 이전 탐색에 있는 세션인지 구분 할 수 있습니다. 
-
-RenderView::DidCommitLoadForFrame는 load commit을 관리 합니다.
-이전 페이지 상태는 viewHostMsg_UpdateState메시지를 통해  history session 에 저장됩니다. 
-
-브라우저에 네비게이션 상태를 업데이트 할 것을 요청한다. 
-
-
- This will tell the browser to update the corresponding NavigationEntry (identified by RenderView's current page ID) with the new history state.
-
-RenderView의 현재 페이지 id는 committed 페이제 의해 반영된다. 
-새로운 네비게이션을 위해 새로운 유니크 아이디가 생성되고, 이전 목록 세션을 위해 첫 번째 방문시 받은 ID로 할당 되며, 네비게이션이 시작될 때 WebRequest에 저장된다. 
-
-ViewHostMsg_FrameNavigate 메시지는 브라우저로 보내진다. 네비게이션 목록의 결과를 새로운 url과 기타 정보와 함께 업데이트 한다. 
-  * A ViewHostMsg_FrameNavigate message is sent to the browser, updating the corresponding NavigationEntry (identified by RenderView's newly updated page ID) with the new URL and other information.
-
+    * WebRequest 는 여러 추가 정보들 사이에서 네비게이션을 대표한다. 새로운 네비게이션은 -1의 ID를 갖는다.
+    * “이전 항목”으로 이동할 때는 처음 방문 했을 때의  ID가 할당 됩니다.
+    * 이 추가정보는 로드가 “commits”될 때, 쿼리된다. 
+    * 메인 WebFrame은 새로운 요청의 로드를 요청한다.
+  * 렌더러가 요청을 시작할 때, (유저가 링크를 클릭하거나, 자바스크립트가 location을 변경하는 등)
+    * WebCore::FrameLoader는 bajillion varied 로드 메소드를 통해 로드를 요청한다. (??????)
+    * 첫 포켓을 서버로 부터 받으면 로드는 완료 된다. (더 이상 “pending”, “provisional”가 없을 때)
+  * 첫 방문이라면, webCore는 새로운 historyItem을 만들고 이전 탐색 리스트에  추가할 것이다. 
+  * 우리는 새로운 탐색인지 이전 탐색에 있는 세션인지 구분 할 수 있습니다. 
+    * RenderView::DidCommitLoadForFrame는 load commit을 관리 합니다.
+    * 이전 페이지 상태는 viewHostMsg_UpdateState메시지를 통해  history session 에 저장됩니다. 
+    * 브라우저에 네비게이션 상태를 업데이트 할 것을 요청한다. 
+    * RenderView의 현재 페이지 id는 committed 페이제 의해 반영된다. 
+  * 새로운 네비게이션을 위해 새로운 유니크 아이디가 생성되고, 이전 목록 세션을 위해 첫 번째 방문시 받은 ID로 할당 되며, 네비게이션이 시작될 때 WebRequest에 저장된다. 
+ * ViewHostMsg_FrameNavigate 메시지는 브라우저로 보내진다. 네비게이션 목록의 결과를 새로운 url과 기타 정보와 함께 업데이트 한다. 
+  
