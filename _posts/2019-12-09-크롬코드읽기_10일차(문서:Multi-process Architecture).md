@@ -1,3 +1,15 @@
+---
+title:  "Chromium 문서 - Multi-process Architecture"
+excerpt: "Chromium 문서읽기 Multi-process Architecture"
+
+categories:
+  - Chromium
+tags:
+  - 크로미움
+  - Chromium
+last_modified_at: 2019-12-07T17:30:00
+---
+
 # Multi-process Architecture
 ## 문제
 * 거의 불가능한 이상적인 렌더링 엔진
