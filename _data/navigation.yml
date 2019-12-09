@@ -1,0 +1,10 @@
+ # main links
+main:
+  - title: "Chromium"
+    url: /categories/chromium/
+  - title: "Web Media"
+    url: /categories/webMedia/
+  - title: "Tags"
+    url: /tags/
+  - title: "About"
+    url: /about/
