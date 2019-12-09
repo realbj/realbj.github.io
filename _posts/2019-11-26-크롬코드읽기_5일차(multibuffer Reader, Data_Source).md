@@ -1,3 +1,16 @@
+---
+title:  "Chromium Media Code - multibuffer Reader, Data_Source"
+excerpt: "Chromium Media 코드읽기 (multibuffer Reader, Data_Source)"
+
+categories:
+  - webMedia
+tags:
+  - 크로미움
+  - Chromium
+  - media
+last_modified_at: 2019-12-07T17:30:00
+---
+
 # multibuffer_reader / multibuffer_data_source
 ## reader public 함수 내용들.
 * Available  : AvailableAt(현재위치)
