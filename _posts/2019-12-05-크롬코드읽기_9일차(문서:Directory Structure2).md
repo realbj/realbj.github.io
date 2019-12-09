@@ -1,3 +1,15 @@
+---
+title:  "Chromium 문서 - 소스 디렉토리(Directory Structure) 2"
+excerpt: "Chromium 문서읽기 (소스 디렉토리,Directory Structure) 2"
+
+categories:
+  - Chromium
+tags:
+  - 크로미움
+  - Chromium
+last_modified_at: 2019-12-07T17:30:00
+---
+
 ## chrome/
 * app
   * app은 프로그램의 가장 기본적인 레벨이다.
