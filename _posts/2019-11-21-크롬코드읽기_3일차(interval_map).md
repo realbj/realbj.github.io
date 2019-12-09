@@ -7,7 +7,7 @@ categories:
 tags:
   - 크로미움
   - Chromium
-  - media
+  - webMedia
 last_modified_at: 2019-12-07T17:30:00
 ---
 
