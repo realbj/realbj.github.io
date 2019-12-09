@@ -1,3 +1,16 @@
+---
+title:  "Chromium Media Code - Multibuffer"
+excerpt: "Chromium Media 코드읽기 (Multibuffer)"
+
+categories:
+  - webMedia
+tags:
+  - 크로미움
+  - Chromium
+  - media
+last_modified_at: 2019-12-07T17:30:00
+---
+
 # Multibuffer
 * File
   * /src/media/blink/multibuffer.cc
