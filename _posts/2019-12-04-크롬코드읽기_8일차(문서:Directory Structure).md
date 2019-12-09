@@ -1,4 +1,16 @@
-# 크로미움 소스 디렉토리 구조 알아 보기 (작성중)
+---
+title:  "Chromium 문서 - 소스 디렉토리"
+excerpt: "Chromium 문서읽기 (소스 디렉토리)"
+
+categories:
+  - Chromium
+tags:
+  - 크로미움
+  - Chromium
+last_modified_at: 2019-12-07T17:30:00
+---
+
+# 크로미움 소스 디렉토리 구조 알아 보기 1
 ## 개요
 * 크로미움은 브라우저(browser)와 렌더러(renderer, Blink 포함)로 2가지로 나뉘어 진다. 
   * 브라우저는 메인 프로세스로 모든 UI와 입출력(I/O)를 담당한다. 
