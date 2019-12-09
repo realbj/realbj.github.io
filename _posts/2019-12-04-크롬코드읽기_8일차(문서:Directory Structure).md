@@ -1,6 +1,6 @@
 ---
-title:  "Chromium 문서 - 소스 디렉토리"
-excerpt: "Chromium 문서읽기 (소스 디렉토리)"
+title:  "Chromium 문서 - 소스 디렉토리(Directory Structure) 1 "
+excerpt: "Chromium 문서읽기 (소스 디렉토리,Directory Structure) 1"
 
 categories:
   - Chromium
