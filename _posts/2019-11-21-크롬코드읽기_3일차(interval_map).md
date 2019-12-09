@@ -1,3 +1,16 @@
+---
+title:  "Chromium Media Code - IntervalMap"
+excerpt: "Chromium Media 코드읽기 (IntervalMap)"
+
+categories:
+  - webMedia
+tags:
+  - 크로미움
+  - Chromium
+  - media
+last_modified_at: 2019-12-07T17:30:00
+---
+
 IntervalMap
 ====
 * file
