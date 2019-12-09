@@ -1,3 +1,16 @@
+---
+title:  "Chromium Media Code - url index, buffered_data_source_host"
+excerpt: "Chromium Media 코드읽기 (url index, buffered_data_source_host)"
+
+categories:
+  - webMedia
+tags:
+  - 크로미움
+  - Chromium
+  - media
+last_modified_at: 2019-12-07T17:30:00
+---
+
 # url index
 * url 관련 정보 + multibuffer 로 구성되어 있다. 
 * unittest에는 URL과 직접적으로 관련된 내용만 작성되어 있다. 
