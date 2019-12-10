@@ -23,7 +23,7 @@ title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "L사에 취직한 개발자"
 description              : "이직을 꿈꾸는 크로미움 개발자"
-url                      : # "https://realbj.github.io/"# the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : "https://realbj.github.io/"# the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : "/assets/images/IMG_0933.jpg" # path of fallback teaser image, e.g. "/assets/images/500x300.png"
