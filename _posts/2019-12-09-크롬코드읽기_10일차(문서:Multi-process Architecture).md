@@ -1,6 +1,6 @@
 ---
-title:  "Chromium 문서 - Multi-process Architecture"
-excerpt: "Chromium 문서읽기 Multi-process Architecture"
+title:  "Chromium 문서 - Multi-process Architecture (1)"
+excerpt: "Chromium 문서읽기 Multi-process Architecture (1) "
 
 categories:
   - Chromium
