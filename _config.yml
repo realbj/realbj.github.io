@@ -21,7 +21,7 @@ locale                   : "en-US"
 title                    : "중급 개발자가 되는 길"
 title_separator          : "지금은 브라우저 담당자"
 subtitle                 : "브라우저 공부중" # site tagline that appears below site title in masthead
-name                     : "L사 다니는 개발자"
+name                     : "아직은 초급 개발자"
 description              : "이직을 꿈꾸는 크로미움 개발자"
 url                      : "https://realbj.github.io/" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
