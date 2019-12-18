@@ -1,3 +1,15 @@
+---
+title:  "Chromium 문서 - How Chromium Displays Web Pages (1)"
+excerpt: "How Chromium Displays Web Pages (1) "
+
+categories:
+  - Chromium
+tags:
+  - 크로미움
+  - Chromium
+last_modified_at: 2019-12-18T17:30:00
+---
+
 # Chromium는 어떻게  웹페이지를 보여 줄까
 * 이 문서는 Chromium에서 웹 페이지를 어떻게 보여주는 가를 아래에서 위로 설명합니다. 
 * multi-process 아키텍트 디자인 문서를 먼저 읽어야 합니다. 
@@ -52,3 +64,27 @@
   * Skia는 /third_party/skia에 위치되어 있으며, 그래픽 동작의 주요 진입 지점은 /webkit/port/platform/graphics/GraphicsContextSkia.cpp. 이다. 
   * 같은 경로와 /base/gfx의  여러 파일들을 사용한다. 
 		
+
+### The WebKit glue
+* 크로미움 어플리케이션은 써드파티 WebKit 코드와 다른 유형(type), 코딩 스타일 그리고 코드 배치를 사용한다. 
+* WebKit "glue" 는 구글의 코딩 규칙과 타입을 사용하여 WebKit에 편리한 임베디드 API 를 제공한다.
+  * (예를 들면, std:string 대신 WebCore::String , GURL 대신 KURL을 사용한다.)
+* glue(글루) 코드는  /webkit/glue 에 위치한다.
+* 글루 객체는 보통 WebKit 객체와 비슷한 이름을 사용한다. 하지만, "Web"으로 시작한다. 
+  * 예를 들면 WebCore::Frame 이 WebFrame 이 된다.
+
+* WebKit "glue"레이어는 WebCore 데이터 유형에서 나머지 크로미움 코드베이스를 격리하다.
+  * 크로미움 코드 기반의 WebCore 변경의 영향을 최소화하기 위해. 
+* 예를 들면 크로미움이 WebCore 데이터 유형을 직접 사용하지 않는다.
+* API는 WebKit "glue"에 추가되었다. 
+  * 일부 WebCore 객체를 사용이 해야 할 때, 크로미움의 benefit을 위해
+  
+* test shell 어플리케이션은 
+  * WebKit 포트와 glue 코드를 테스트 하기 위한 웹 브라우저의 뼈대이다. 
+  * Chromium이 WebKit과 통신에 사용하는 glue 인터페이스를 동일하게 사용한다. 
+  * 유사한 방법을 사용하면 개발자가 신규 코드를 테스트 할 수 있다.
+    * 복잡한 다수의 브라우저 기능, 쓰레드 프로세스가 없어도 된다.
+  * 이 어플리케이션은 자동화된 WebKit test를 실행하기 위해 사용된다.
+  * 그러나, "test shell"의 단점은 크로미움 처럼 멀티 프로세스 방식으로  WebKit을 사용하지 않습니다.
+    * Content 모듈은 "content shell"에 임베디드 되어있습니다. 
+      * "content shell은 곧 test를 실행할 것입니다. 
