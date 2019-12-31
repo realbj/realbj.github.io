@@ -12,11 +12,12 @@ last_modified_at: 2020-01-01T17:30:00
 ---
 # Audio / Video Playback
 ## Document
-  - [HTMLAudioElement](https://html.spec.whatwg.org/#htmlaudioelement)
-  - [HTMLMediaElement](https://html.spec.whatwg.org/#htmlmediaelement)
-  - [HTMLVideoElement](https://html.spec.whatwg.org/#htmlvideoelement)
+  * [HTMLAudioElement](https://html.spec.whatwg.org/#htmlaudioelement)
+  * [HTMLMediaElement](https://html.spec.whatwg.org/#htmlmediaelement)
+  * [HTMLVideoElement](https://html.spec.whatwg.org/#htmlvideoelement)
   
-Much of the documentation below is out of date and has significant gaps. For the most up to date documentation please see the [README.md](https://chromium.googlesource.com/chromium/src/+/master/media/README.md)  file in the media/ directory (which is where all the code for Chromium's media pipeline lives).
+* 아래 문서 대부분이 오래되어 상당한 차이가 있습니다. 
+* 최신 문서는 [README.md](https://chromium.googlesource.com/chromium/src/+/master/media/README.md) 를 참고하세요 (media/ directory) (Chromium의 미디어 파이프라인에 대한 코드가 있는 위치입니다.).
 
 ## Overview
 There are several major components to Chromium's media playback implementation, here are three most folks are commonly interested in:
