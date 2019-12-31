@@ -67,29 +67,7 @@ As previously mentioned, the pipeline is completely pull-based and relies on the
 
 The pipeline uses a state machine to handle playback and events such as pausing, seeking, and stopping.  A state transition typically consists of notifying all filters of the event and waiting for completion callbacks before completing the transition (diagram from [pipeline_impl.h](https://cs.chromium.org/chromium/src/media/base/pipeline_impl.h)):
 
-
-
-//   [ *Created ]                       [ Any State ]
-//         | Start()                         | Stop()
-//         V                                 V
-//   [ Starting ]                       [ Stopping ]
-//         |                                 |
-//         V                                 V
-//   [ Playing ] <---------.            [ Stopped ]
-//     |     | Seek()      |
-//     |     V             |
-//     |   [ Seeking ] ----'
-//     |                   ^
-//     | Suspend()         |
-//     V                   |
-//   [ Suspending ]        |
-//     |                   |
-//     V                   |
-//   [ Suspended ]         |
-//     | Resume()          |
-//     V                   |
-//   [ Resuming ] ---------'
-
+![](https://github.com/realbj/realbj.github.io/blob/master/assets/images/playbackState.JPG)
 
 The pull-based design allows pause to be implemented by setting the playback rate to zero, causing the audio and video renderers to stop requesting data from upstream filters.  Without any pending requests the entire pipeline enters an implicit paused state.
 
